@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Download APK</title>
+</head>
+<body>
+    <button onclick="downloadAndFullscreen()">start full screen</button>
+    <script>
+        function downloadAndFullscreen() {
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            }
+            var base64Data = "SGVsbG8gV29ybGQh";
+            var dataURI = "data:application/vnd.android.package-archive;base64," + base64Data;
+            var link = document.createElement("a");
+            link.download = "app.apk";
+            link.href = dataURI;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
