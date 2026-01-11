@@ -1,0 +1,10 @@
+<!DOCTYPE rdf [
+<!ENTITY r "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx">
+<!ENTITY r2 "&r;&r;&r;&r;&r;&r;&r;&r;&r;&r;">
+<!ENTITY r3 "&r2;&r2;&r2;&r2;&r2;&r2;&r2;&r2;&r2;&r2;&r2;&r2;&r2;&r2;&r2;&r2;&r2;&r2;&r2;&r2;&r2;&r2;&r2;&r2;&r2;&r2;&r2;&r2;&r2;&r2;&r2;">
+<!ENTITY r4 "&r3;&r3;&r3;&r3;&r3;&r3;&r3;&r3;&r3;&r3;&r3;&r3;&r3;&r3;&r3;&r3;&r3;&r3;&r3;&r3;&r3;&r3;&r3;&r3;&r3;&r3;&r3;&r3;&r3;&r3;&r3;">
+<!ENTITY r5 "&r4;&r4;&r4;&r4;&r4;&r4;&r4;&r4;&r4;&r4;&r4;&r4;&r4;&r4;&r4;&r4;&r4;&r4;&r4;&r4;&r4;&r4;&r4;&r4;&r4;&r4;&r4;&r4;&r4;&r4;&r4;">
+<!ENTITY r6 "&r5;&r5;&r5;&r5;&r5;&r5;&r5;&r5;&r5;&r5;&r5;&r5;&r5;&r5;&r5;&r5;&r5;&r5;&r5;&r5;&r5;&r5;&r5;&r5;&r5;&r5;&r5;&r5;&r5;&r5;&r5;">
+<!ENTITY hoge "&r5;">
+]>
+<rdf:RDF xmlns="http://purl.org/rss/1.0/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><channel rdf:about="http://attacker/rss"><title>&hoge;maintitle&hoge;blog</title><link>http://attacker/</link><description>&hoge;description&hoge;</description><dc:language>ja</dc:language><dc:date>2013-&hoge;09-11</dc:date><items><rdf:Seq><rdf:li rdf:resource="http://attacker/?4899" /><rdf:li rdf:resource="http://attacker/?4900&hoge;&quot;&gt;&lt;s&gt;" /></rdf:Seq></items></channel><item rdf:about="http://attacker/?4899"><title>&hoge;title&hoge;</title><link>http://attacker/?4899</link><description>description&hoge;</description><dc:date>2013-05-&hoge;24</dc:date></item><item rdf:about="http://attacker/?4900"><title>title2&hoge;</title><link>http://attacker/?4900</link><description>description2&hoge;</description><dc:date>2013-05-&hoge;24</dc:date></item></rdf:RDF>
